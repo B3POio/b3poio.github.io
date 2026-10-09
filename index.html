@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101014">
+    <meta name="description" content="B3PO — Software, systems, Bitcoin, and an open internet.">
+    <title>B3PO / README</title>
+    <link rel="icon" href="./B3POio.png" type="image/png">
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #151120;
+            --panel: #1e1830;
+            --text: #eeeef5;
+            --muted: #a4a4b8;
+            --purple: #ae91ff;
+            --green: #a9e5bb;
+            --line: #30303d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(ellipse at 85% 0%, #7765ff30, transparent 50%),
+                radial-gradient(ellipse at 0% 85%, #7765ff18, transparent 45%);
+            color: var(--text);
+            font: 15px/1.8 ui-monospace, SFMono-Regular, Consolas,
+                "Liberation Mono", monospace;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 85% 0%, #8060e51c, transparent 45%),
+                radial-gradient(ellipse at 0% 85%, #8060e510, transparent 40%);
+        }
+
+        main {
+            max-width: 850px;
+            margin: auto;
+            padding: 48px 28px;
+        }
+
+        a {
+            color: var(--purple);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a:focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 6px;
+            border-radius: 3px;
+        }
+
+        .file-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .file-name {
+            color: var(--text);
+        }
+
+        .file-name::before {
+            content: "●";
+            margin-right: 10px;
+            color: var(--purple);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            align-items: center;
+            gap: 24px;
+            padding: 45px 0 30px;
+        }
+
+        .prompt {
+            margin: 0 0 10px;
+            color: var(--green);
+            font-size: 13px;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: system-ui, sans-serif;
+            font-size: clamp(64px, 12vw, 100px);
+            font-weight: 850;
+            letter-spacing: -0.075em;
+            line-height: 1;
+        }
+
+        h1 span {
+            color: var(--purple);
+        }
+
+        .subtitle {
+            margin: 18px 0 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .avatar {
+            display: block;
+            width: 100%;
+            height: 260px;
+            object-fit: contain;
+            filter: drop-shadow(0 12px 28px #9471ff20);
+        }
+
+        .intro {
+            max-width: 60ch;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 22px 0 0;
+        }
+
+        .badge {
+            padding: 3px 10px;
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .badge:first-child {
+            border-color: #ae91ff55;
+            color: var(--purple);
+            background: #ae91ff0b;
+        }
+
+        section {
+            margin-top: 42px;
+        }
+
+        h2 {
+            margin: 0 0 18px;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+
+        .hash {
+            margin-right: 10px;
+            color: var(--purple);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .project {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--panel);
+            color: var(--text);
+            transition: border-color 160ms ease, transform 160ms ease;
+        }
+
+        .project:hover {
+            border-color: var(--purple);
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+
+        .project-mark {
+            color: var(--purple);
+            font-size: 25px;
+            line-height: 1;
+            margin-bottom: 18px;
+        }
+
+        .project strong {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .project p {
+            margin: 9px 0 20px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .project-path {
+            margin-top: auto;
+            color: var(--purple);
+            font-size: 11px;
+            overflow-wrap: anywhere;
+        }
+
+        .note {
+            margin: 0;
+            padding: 12px 18px;
+            border-left: 2px solid var(--purple);
+            color: var(--muted);
+        }
+
+        .note strong {
+            color: var(--text);
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 26px;
+            font-size: 14px;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 48px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        footer span:last-child {
+            color: var(--green);
+        }
+
+        @media (max-width: 580px) {
+            main {
+                padding: 28px 20px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr 110px;
+                gap: 10px;
+                padding-top: 36px;
+            }
+
+            .avatar {
+                height: 155px;
+            }
+
+            .subtitle {
+                font-size: 11px;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .file-bar {
+                font-size: 11px;
+            }
+
+            .intro {
+                font-size: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project {
+                transition: none;
+            }
+
+            .project:hover {
+                transform: none;
+            }
+        }
+
+        .support {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--panel);
+        }
+
+        .support summary {
+            padding: 16px 20px;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .support summary:hover,
+        .support[open] summary {
+            color: var(--purple);
+        }
+
+        .support summary:focus-visible,
+        .copy-address:focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 4px;
+        }
+
+        .support-content {
+            padding: 0 20px 20px;
+        }
+
+        .wallet+.wallet {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+        }
+
+        .wallet-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .wallet-label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .copy-address {
+            min-height: 36px;
+            padding: 5px 12px;
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            background: transparent;
+            color: var(--purple);
+            font: inherit;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .copy-address:hover {
+            border-color: var(--purple);
+        }
+
+        .wallet-address {
+            display: block;
+            color: var(--muted);
+            font: inherit;
+            font-size: 11px;
+            overflow-wrap: anywhere;
+            user-select: all;
+        }
+
+        .copy-status {
+            min-height: 1.8em;
+            margin: 12px 0 0;
+            color: var(--green);
+            font-size: 11px;
+        }
+        .quote {
+        margin: 40px 0 0;
+        text-align: center;
+        }
+
+        .quote p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        font-style: italic;
+        }
+
+        .quote cite {
+        display: block;
+        margin-top: 6px;
+        color: var(--purple);
+        font-size: 11px;
+        font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="file-bar">
+            <span class="file-name">B3PO / README.md</span>
+            <a href="https://github.com/B3POio">view source ↗</a>
+        </div>
+
+        <header class="hero">
+            <div>
+                <p class="prompt">$ whoami</p>
+                <h1>B3PO<span>.</span></h1>
+                <p class="subtitle">Human-cyborg relations.</p>
+            </div>
+
+            <img class="avatar" src="./B3POio.png" alt="B3PO sitting in meditation" width="220" height="260">
+        </header>
+
+        <p class="intro">
+            Building software. Connecting systems.<br>
+            Exploring Bitcoin, privacy, and the open internet.
+        </p>
+
+        <div class="badges" aria-label="Interests">
+            <span class="badge">software engineer</span>
+            <span class="badge">systems &amp; infrastructure</span>
+            <span class="badge">open source</span>
+        </div>
+
+        <section aria-labelledby="projects-title">
+            <h2 id="projects-title"><span class="hash">##</span>Things I build</h2>
+
+            <div class="projects">
+                <a class="project" href="https://github.com/B3POio/bitcoin-wallet-generator">
+                    <span class="project-mark" aria-hidden="true">₿</span>
+                    <strong>Bitcoin Wallet Generator</strong>
+                    <p>Generate Bitcoin wallets locally in your browser.</p>
+                    <span class="project-path">/bitcoin-wallet-generator ↗</span>
+                </a>
+
+                <a class="project" href="https://github.com/B3POio/x-nostr">
+                    <span class="project-mark" aria-hidden="true">&lt;/&gt;</span>
+                    <strong>X-Nostr</strong>
+                    <p>Explore the project on GitHub.</p>
+                    <span class="project-path">/x-nostr ↗</span>
+                </a>
+            </div>
+        </section>
+
+        <section aria-labelledby="philosophy-title">
+            <h2 id="philosophy-title"><span class="hash">##</span>A few principles</h2>
+            <p class="note">
+                Keep it simple. Make it useful.<br>
+                <strong>Build for a free, open, and private internet.</strong>
+            </p>
+        </section>
+
+        <section aria-labelledby="contact-title">
+            <h2 id="contact-title"><span class="hash">##</span>Find me</h2>
+            <nav class="links" aria-label="Contact and profiles">
+                <a href="https://github.com/B3POio">GitHub ↗</a>
+                <a href="https://gitlab.com/B3PO">GitLab ↗</a>
+                <a href="https://primal.net/B3PO">Nostr ↗</a>
+                <a href="mailto:me@b3po.io">Email ↗</a>
+            </nav>
+        </section>
+
+        <section aria-label="Support">
+            <details class="support">
+                <summary>Support my work</summary>
+
+                <div class="support-content">
+                    <div class="wallet">
+                        <div class="wallet-header">
+                            <span class="wallet-label">Bitcoin · BTC</span>
+                            <button class="copy-address" type="button" data-address-id="bitcoin-address"
+                                data-currency="Bitcoin" aria-label="Copy Bitcoin address">Copy</button>
+                        </div>
+
+                        <code class="wallet-address"
+                            id="bitcoin-address">bc1q98c8pc7hk85cljhsgj6gdd4sd98zcduqx3x8z4</code>
+                    </div>
+
+                    <div class="wallet">
+                        <div class="wallet-header">
+                            <span class="wallet-label">Monero · XMR</span>
+                            <button class="copy-address" type="button" data-address-id="monero-address"
+                                data-currency="Monero" aria-label="Copy Monero address">Copy</button>
+                        </div>
+
+                        <code class="wallet-address"
+                            id="monero-address">47teg4XgBCWHx6uNAaXiob3Bywa4ifefoWBogpnRiWDgSKcVs18EVDQAmZKti4noWNgP1zQ7YaqL8BvPm9u5iyKtTqs6ENH</code>
+                    </div>
+
+                    <p class="copy-status" id="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
+                </div>
+            </details>
+        </section>
+        <blockquote class="quote">
+            <p>“Simplicity is the ultimate sophistication.”</p>
+        </blockquote>
+        <footer>
+            <span>// less noise, more signal</span>
+            <span>return 0;</span>
+        </footer>
+    </main>
+    <script>
+        (() => {
+            const status = document.getElementById("copy-status");
+            const buttons = document.querySelectorAll(".copy-address");
+            let resetTimer;
+
+            buttons.forEach((button) => {
+                button.addEventListener("click", async () => {
+                    const addressElement = document.getElementById(
+                        button.dataset.addressId
+                    );
+                    const address = addressElement.textContent.trim();
+
+                    clearTimeout(resetTimer);
+                    status.textContent = "";
+
+                    try {
+                        await navigator.clipboard.writeText(address);
+
+                        buttons.forEach((item) => {
+                            item.textContent = "Copy";
+                        });
+
+                        button.textContent = "Copied";
+                        status.textContent =
+                            `${button.dataset.currency} address copied.`;
+
+                        resetTimer = setTimeout(() => {
+                            button.textContent = "Copy";
+                            status.textContent = "";
+                        }, 3000);
+                    } catch {
+                        const selection = window.getSelection();
+                        const range = document.createRange();
+
+                        range.selectNodeContents(addressElement);
+
+                        if (selection) {
+                            selection.removeAllRanges();
+                            selection.addRange(range);
+                        }
+
+                        status.textContent =
+                            "Couldn't copy automatically. Select and copy the address manually.";
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
